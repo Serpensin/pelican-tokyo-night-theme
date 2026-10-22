@@ -55,7 +55,7 @@ HTML);
 
     private function publishStylesheets(): void
     {
-        $source = __DIR__ . '/../..' . '/css';
+        $source = __DIR__ . '/../css';
         $destination = public_path('plugins/serpensin-tokyo-night-theme/css');
 
         if (File::isDirectory($source) && !File::isDirectory($destination)) {

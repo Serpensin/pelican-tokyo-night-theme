@@ -10,6 +10,7 @@ base = (root / 'css/base.css').read_text()
 for token in [
     "renderHook('panels::head.end'",
     "public_path('plugins/serpensin-tokyo-night-theme/css')",
+    "__DIR__ . '/../css'",
     "tokyo-night.css",
     "tokyo-night-light.css",
     "MutationObserver",
