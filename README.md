@@ -1,42 +1,37 @@
 # Tokyo Night for Pelican
 
-A Pelican theme plugin with both official Tokyo Night color modes:
+Tokyo Night for Pelican brings both official Tokyo Night color modes to the Panel:
 
-- Tokyo Night Light is used while Pelican is in light mode.
-- Tokyo Night is used while Pelican is in dark mode.
+- **Tokyo Night Light** follows Pelican’s light appearance mode.
+- **Tokyo Night** follows Pelican’s dark appearance mode.
 
-The user’s existing Pelican light/dark-mode control chooses the palette; the plugin does not add a second, competing toggle.
+Use Pelican’s normal light/dark-mode control to switch between them. This theme does not add a separate toggle.
 
-## Design
+## What changes
 
-The theme ports the Tokyo Night palette to Pelican/Filament surfaces: page backgrounds, sidebar, topbar, cards, tables, forms, modals, tabs, badges, alerts, and focus states. It keeps the original layout and behavior intact.
+The theme applies the Tokyo Night palette to the Panel interface while preserving Pelican’s normal layout and behavior:
 
-Palette values are adapted from [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim), licensed under MIT. See `LICENSE` for this plugin’s license.
+- page backgrounds, sidebar, and topbar
+- cards, tables, and forms
+- dialogs, tabs, badges, and notifications
+- buttons, links, hover states, and keyboard-focus states
 
-## Requirements
+## Compatibility
 
 - Pelican Panel `^1.0.0`
-- Node.js 22 and Yarn/Corepack available to the Panel asset-build process
 
 ## Install
 
-1. Put the directory in `plugins/serpensin-tokyo-night-theme`.
-2. From the Panel directory, run:
+1. Place the plugin directory at:
+
+   ```text
+   plugins/serpensin-tokyo-night-theme
+   ```
+
+2. From the Pelican Panel directory, run:
 
    ```sh
    php artisan p:plugin:install serpensin-tokyo-night-theme
    ```
 
-3. Select light or dark mode in Pelican’s normal appearance control.
-
-## Local checks
-
-```sh
-php -l src/TokyoNightThemePlugin.php
-python3 tests/test_manifest.py
-python3 tests/test_theme_css.py
-```
-
-## Development status
-
-This repository is intentionally local-only for now. It has no remote and no release tag.
+3. Open Pelican and select your preferred light or dark appearance mode.
