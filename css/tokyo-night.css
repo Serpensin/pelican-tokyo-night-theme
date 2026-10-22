@@ -1,0 +1,23 @@
+@import url("./base.css");
+
+/* Tokyo Night palette adapted from folke/tokyonight.nvim (MIT). */
+:root {
+    --tn-bg: #1a1b26;
+    --tn-bg-dark: #16161e;
+    --tn-surface: #24283b;
+    --tn-raised: #292e42;
+    --tn-hover: #33467c;
+    --tn-border: #3b4261;
+    --tn-fg: #c0caf5;
+    --tn-muted: #a9b1d6;
+    --tn-blue: #7aa2f7;
+    --tn-cyan: #7dcfff;
+    --tn-green: #9ece6a;
+    --tn-yellow: #e0af68;
+    --tn-orange: #ff9e64;
+    --tn-red: #f7768e;
+    --tn-magenta: #bb9af7;
+    --tn-selection: #33467c;
+    --tn-shadow: rgb(0 0 0 / 28%);
+    --tn-overlay: rgb(22 22 30 / 60%);
+}
