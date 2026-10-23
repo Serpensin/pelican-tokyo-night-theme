@@ -121,4 +121,25 @@ a:not(.fi-btn):hover { color: var(--tn-cyan); }
 
 .fi-modal-close-overlay { background: var(--tn-overlay); backdrop-filter: blur(3px); }
 
+/* xterm renders its text onto canvas, but its viewport remains CSS-addressable. */
+#terminal,
+#terminal .xterm,
+#terminal .xterm-viewport {
+    background-color: var(--tn-bg-dark) !important;
+}
+
+#terminal .xterm-viewport {
+    border: 1px solid var(--tn-border);
+}
+
+/* Server information schemas render one Livewire card per field. Keep those cards
+ * visually continuous with their page instead of showing stacked black blocks. */
+.fi-main-content div[wire\:snapshot].fi-sc-component,
+.fi-main-content div[wire\:snapshot] > .fi-sc-component,
+.fi-main-content .fi-sc-component > div[wire\:snapshot] {
+    background: var(--tn-bg) !important;
+    border-color: var(--tn-bg) !important;
+    box-shadow: none !important;
+}
+
 ::selection { background: var(--tn-selection); color: var(--tn-fg); }

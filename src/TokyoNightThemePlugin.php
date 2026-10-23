@@ -58,8 +58,18 @@ HTML);
         $source = __DIR__ . '/../css';
         $destination = public_path('plugins/serpensin-tokyo-night-theme/css');
 
-        if (File::isDirectory($source) && !File::isDirectory($destination)) {
-            File::copyDirectory($source, $destination);
+        if (!File::isDirectory($source)) {
+            return;
+        }
+
+        File::ensureDirectoryExists($destination);
+
+        foreach (File::files($source) as $stylesheet) {
+            $published = $destination . '/' . $stylesheet->getFilename();
+
+            if (!File::exists($published) || File::get($stylesheet->getPathname()) !== File::get($published)) {
+                File::copy($stylesheet->getPathname(), $published);
+            }
         }
     }
 }

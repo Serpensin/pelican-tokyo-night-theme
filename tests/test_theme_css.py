@@ -11,6 +11,8 @@ for token in [
     "renderHook('panels::head.end'",
     "public_path('plugins/serpensin-tokyo-night-theme/css')",
     "__DIR__ . '/../css'",
+    'File::files($source)',
+    'File::copy($stylesheet->getPathname(), $published)',
     "tokyo-night.css",
     "tokyo-night-light.css",
     "MutationObserver",
@@ -24,7 +26,10 @@ for css, name, color in [(dark, 'dark', '#1a1b26'), (light, 'light', '#d5d6db')]
     assert '@import url("./base.css");' in css, f'{name} stylesheet does not import the shared rules'
     assert color in css, f'{name} palette background missing'
 
-for token in ['.fi-sidebar', '.fi-topbar', '.fi-section', '.fi-btn', '.fi-input-wrp', '.fi-ta-ctn', '.fi-modal-window']:
+for token in [
+    '.fi-sidebar', '.fi-topbar', '.fi-section', '.fi-btn', '.fi-input-wrp', '.fi-ta-ctn', '.fi-modal-window',
+    '#terminal .xterm-viewport', 'div[wire\\:snapshot].fi-sc-component', 'box-shadow: none !important;',
+]:
     assert token in base, f'missing shared theme rule: {token}'
 
 print('theme CSS assertions passed')
