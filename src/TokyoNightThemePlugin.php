@@ -35,13 +35,47 @@ class TokyoNightThemePlugin implements Plugin
 (() => {
     const dark = '{$dark}';
     const light = '{$light}';
+    const terminals = new Set();
     const stylesheet = () => document.getElementById('tokyo-night-theme-stylesheet');
+    const terminalPalette = () => document.documentElement.classList.contains('dark')
+        ? { background: '#292c3d', foreground: '#c0caf5', cursor: '#c0caf5', selection: '#33467c' }
+        : { background: '#e0e0e6', foreground: '#3760bf', cursor: '#3760bf', selection: '#bcc7e8' };
+    const refreshTerminals = () => terminals.forEach((terminal) => {
+        terminal.options.theme = { ...terminal.options.theme, ...terminalPalette() };
+    });
+    const wrapTerminal = (xterm) => {
+        if (!xterm?.Terminal || xterm.__tokyoNightTerminalWrapped) return;
+        const NativeTerminal = xterm.Terminal;
+        xterm.Terminal = class TokyoNightTerminal extends NativeTerminal {
+            constructor(options = {}) {
+                super({ ...options, theme: { ...options.theme, ...terminalPalette() } });
+                terminals.add(this);
+            }
+        };
+        Object.defineProperty(xterm, '__tokyoNightTerminalWrapped', { value: true });
+    };
+    const installTerminalWrapper = () => {
+        if (window.Xterm) {
+            wrapTerminal(window.Xterm);
+            return;
+        }
+        Object.defineProperty(window, 'Xterm', {
+            configurable: true,
+            get: () => undefined,
+            set: (xterm) => {
+                wrapTerminal(xterm);
+                Object.defineProperty(window, 'Xterm', { configurable: true, writable: true, value: xterm });
+            },
+        });
+    };
     const apply = () => {
         const link = stylesheet();
         if (!link) return;
         const source = document.documentElement.classList.contains('dark') ? dark : light;
         if (link.getAttribute('href') !== source) link.setAttribute('href', source);
+        refreshTerminals();
     };
+    installTerminalWrapper();
     new MutationObserver(apply).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     document.addEventListener('livewire:navigated', apply);
     window.addEventListener('theme-changed', apply);

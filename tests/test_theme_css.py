@@ -16,6 +16,9 @@ for token in [
     "tokyo-night.css",
     "tokyo-night-light.css",
     "MutationObserver",
+    'terminalPalette',
+    'class TokyoNightTerminal extends NativeTerminal',
+    "Object.defineProperty(window, 'Xterm'",
 ]:
     assert token in plugin, f'missing theme-loader token: {token}'
 
