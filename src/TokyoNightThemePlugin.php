@@ -37,19 +37,13 @@ class TokyoNightThemePlugin implements Plugin
     const light = '{$light}';
     const terminals = new Set();
     const stylesheet = () => document.getElementById('tokyo-night-theme-stylesheet');
-    // Keep Kitty's ANSI palette, but use Tokyo Night surfaces that contrast with
-    // Pelican's page background. The Day palette keeps light-mode output legible.
-    const terminalPalette = () => document.documentElement.classList.contains('dark')
-        ? {
-            background: '#24283b', foreground: '#a9b1d6', cursor: '#c0caf5', cursorAccent: '#24283b', selection: '#28344a',
-            black: '#414868', red: '#f7768e', green: '#73daca', yellow: '#e0af68', blue: '#7aa2f7', magenta: '#bb9af7', cyan: '#7dcfff', white: '#c0caf5',
-            brightBlack: '#414868', brightRed: '#f7768e', brightGreen: '#73daca', brightYellow: '#e0af68', brightBlue: '#7aa2f7', brightMagenta: '#bb9af7', brightCyan: '#7dcfff', brightWhite: '#c0caf5',
-        }
-        : {
-            background: '#f1f1f4', foreground: '#3760bf', cursor: '#3760bf', cursorAccent: '#f1f1f4', selection: '#bcc7e8',
-            black: '#343b58', red: '#f52a65', green: '#587539', yellow: '#8c6c3e', blue: '#2e7de9', magenta: '#7847bd', cyan: '#007197', white: '#3760bf',
-            brightBlack: '#6172b0', brightRed: '#f52a65', brightGreen: '#587539', brightYellow: '#8c6c3e', brightBlue: '#2e7de9', brightMagenta: '#7847bd', brightCyan: '#007197', brightWhite: '#3760bf',
-        };
+    // A console stays dark in both Panel modes. It preserves terminal semantics,
+    // keeps ANSI output legible, and remains visibly separate in light mode.
+    const terminalPalette = () => ({
+        background: '#24283b', foreground: '#a9b1d6', cursor: '#c0caf5', cursorAccent: '#24283b', selection: '#28344a',
+        black: '#414868', red: '#f7768e', green: '#73daca', yellow: '#e0af68', blue: '#7aa2f7', magenta: '#bb9af7', cyan: '#7dcfff', white: '#c0caf5',
+        brightBlack: '#414868', brightRed: '#f7768e', brightGreen: '#73daca', brightYellow: '#e0af68', brightBlue: '#7aa2f7', brightMagenta: '#bb9af7', brightCyan: '#7dcfff', brightWhite: '#c0caf5',
+    });
     const refreshTerminals = () => terminals.forEach((terminal) => {
         terminal.options.theme = { ...terminal.options.theme, ...terminalPalette() };
     });

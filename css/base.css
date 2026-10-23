@@ -125,16 +125,27 @@ a:not(.fi-btn):hover { color: var(--tn-cyan); }
 #terminal,
 #terminal .xterm,
 #terminal .xterm-viewport {
-    background-color: var(--tn-surface) !important;
+    background-color: #24283b !important;
 }
 
 #terminal {
-    border: 1px solid var(--tn-border);
-    box-shadow: 0 12px 24px var(--tn-shadow);
+    border: 1px solid #3b4261;
+    box-shadow: 0 12px 24px rgb(15 23 42 / 18%);
 }
 
 #terminal .xterm-viewport {
-    border-inline: 1px solid var(--tn-border);
+    border-inline: 1px solid #3b4261;
+}
+
+#send-command {
+    background: #24283b !important;
+    border-color: #3b4261 !important;
+    color: #a9b1d6 !important;
+}
+
+#send-command::placeholder {
+    color: #787c99 !important;
+    opacity: 1;
 }
 
 /* Server information schemas render one Livewire card per field. Keep those cards

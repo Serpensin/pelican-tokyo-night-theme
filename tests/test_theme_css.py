@@ -24,7 +24,7 @@ for token in [
 
 for token in [
     "background: '#24283b'", "foreground: '#a9b1d6'", "green: '#73daca'", "selection: '#28344a'",
-    "background: '#f1f1f4'", "foreground: '#3760bf'", "black: '#343b58'", "cyan: '#007197'",
+    "A console stays dark in both Panel modes",
 ]:
     assert token in plugin, f'missing terminal palette token: {token}'
 
@@ -37,7 +37,8 @@ for css, name, color in [(dark, 'dark', '#1a1b26'), (light, 'light', '#d5d6db')]
 
 for token in [
     '.fi-sidebar', '.fi-topbar', '.fi-section', '.fi-btn', '.fi-input-wrp', '.fi-ta-ctn', '.fi-modal-window',
-    '#terminal .xterm-viewport', 'div[wire\\:snapshot].fi-sc-component', 'box-shadow: none !important;',
+    '#terminal .xterm-viewport', '#send-command', 'background-color: #24283b !important;',
+    'div[wire\\:snapshot].fi-sc-component', 'box-shadow: none !important;',
 ]:
     assert token in base, f'missing shared theme rule: {token}'
 
