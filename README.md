@@ -11,11 +11,11 @@ Use Pelican’s normal light/dark-mode control to switch between them. This them
 
 ### Tokyo Night Light
 
-![Tokyo Night Light preview](images/light.png)
+![Tokyo Night Light preview](https://cdn.serpensin.com/serpensin/pelican-tokyonight-theme/light.png)
 
 ### Tokyo Night
 
-![Tokyo Night dark preview](images/dark.png)
+![Tokyo Night dark preview](https://cdn.serpensin.com/serpensin/pelican-tokyonight-theme/dark.png)
 
 ## What changes
 
