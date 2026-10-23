@@ -125,11 +125,16 @@ a:not(.fi-btn):hover { color: var(--tn-cyan); }
 #terminal,
 #terminal .xterm,
 #terminal .xterm-viewport {
-    background-color: var(--tn-bg-dark) !important;
+    background-color: var(--tn-surface) !important;
+}
+
+#terminal {
+    border: 1px solid var(--tn-border);
+    box-shadow: 0 12px 24px var(--tn-shadow);
 }
 
 #terminal .xterm-viewport {
-    border: 1px solid var(--tn-border);
+    border-inline: 1px solid var(--tn-border);
 }
 
 /* Server information schemas render one Livewire card per field. Keep those cards

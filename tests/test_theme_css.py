@@ -23,8 +23,8 @@ for token in [
     assert token in plugin, f'missing theme-loader token: {token}'
 
 for token in [
-    "background: '#1a1b26'", "foreground: '#a9b1d6'", "green: '#73daca'", "selection: '#28344a'",
-    "background: '#e0e0e6'", "foreground: '#3760bf'", "black: '#343b58'", "cyan: '#007197'",
+    "background: '#24283b'", "foreground: '#a9b1d6'", "green: '#73daca'", "selection: '#28344a'",
+    "background: '#f1f1f4'", "foreground: '#3760bf'", "black: '#343b58'", "cyan: '#007197'",
 ]:
     assert token in plugin, f'missing terminal palette token: {token}'
 
