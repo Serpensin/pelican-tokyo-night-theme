@@ -37,9 +37,19 @@ class TokyoNightThemePlugin implements Plugin
     const light = '{$light}';
     const terminals = new Set();
     const stylesheet = () => document.getElementById('tokyo-night-theme-stylesheet');
+    // Dark mode mirrors the user's Kitty Tokyo Night palette. Light mode uses the
+    // corresponding Tokyo Night Day ANSI palette so console output stays legible.
     const terminalPalette = () => document.documentElement.classList.contains('dark')
-        ? { background: '#292c3d', foreground: '#c0caf5', cursor: '#c0caf5', selection: '#33467c' }
-        : { background: '#e0e0e6', foreground: '#3760bf', cursor: '#3760bf', selection: '#bcc7e8' };
+        ? {
+            background: '#1a1b26', foreground: '#a9b1d6', cursor: '#c0caf5', cursorAccent: '#1a1b26', selection: '#28344a',
+            black: '#414868', red: '#f7768e', green: '#73daca', yellow: '#e0af68', blue: '#7aa2f7', magenta: '#bb9af7', cyan: '#7dcfff', white: '#c0caf5',
+            brightBlack: '#414868', brightRed: '#f7768e', brightGreen: '#73daca', brightYellow: '#e0af68', brightBlue: '#7aa2f7', brightMagenta: '#bb9af7', brightCyan: '#7dcfff', brightWhite: '#c0caf5',
+        }
+        : {
+            background: '#e0e0e6', foreground: '#3760bf', cursor: '#3760bf', cursorAccent: '#e0e0e6', selection: '#bcc7e8',
+            black: '#343b58', red: '#f52a65', green: '#587539', yellow: '#8c6c3e', blue: '#2e7de9', magenta: '#7847bd', cyan: '#007197', white: '#3760bf',
+            brightBlack: '#6172b0', brightRed: '#f52a65', brightGreen: '#587539', brightYellow: '#8c6c3e', brightBlue: '#2e7de9', brightMagenta: '#7847bd', brightCyan: '#007197', brightWhite: '#3760bf',
+        };
     const refreshTerminals = () => terminals.forEach((terminal) => {
         terminal.options.theme = { ...terminal.options.theme, ...terminalPalette() };
     });
