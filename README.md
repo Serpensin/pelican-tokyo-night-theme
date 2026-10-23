@@ -28,7 +28,8 @@ The theme applies the Tokyo Night palette to the Panel interface while preservin
 
 ## Compatibility
 
-- Pelican Panel `^1.0.0`
+- Tested with Pelican Panel `1.0.0-rc.2`.
+- The plugin manifest does not enforce a Panel-version constraint.
 
 ## Install
 
