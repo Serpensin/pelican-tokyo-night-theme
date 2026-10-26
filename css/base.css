@@ -108,6 +108,43 @@ body,
     background: color-mix(in srgb, var(--tn-blue) 12%, transparent);
 }
 
+/* Resource Limits uses Filament ToggleButtons. The theme's generic primary and
+ * warning button colours must not make both states look selected. */
+.fi-fo-toggle-buttons .fi-btn[aria-pressed='false'] {
+    background: var(--tn-raised) !important;
+    border-color: var(--tn-border) !important;
+    color: var(--tn-muted) !important;
+    box-shadow: none !important;
+}
+
+.fi-fo-toggle-buttons .fi-btn[aria-pressed='true'] {
+    background: var(--tn-active-bg) !important;
+    border-color: var(--tn-active-bg) !important;
+    color: var(--tn-active-fg) !important;
+    box-shadow: 0 0 0 1px var(--tn-active-bg) !important;
+}
+
+/* Pelican marks Unlimited as primary and Limited as warning. Keep the neutral
+ * inactive state, but expose the selected value with its semantic colour. */
+.fi-fo-toggle-buttons .fi-btn.fi-color-primary[aria-pressed='true'] {
+    background: var(--tn-green) !important;
+    border-color: var(--tn-green) !important;
+    box-shadow: 0 0 0 1px var(--tn-green) !important;
+}
+
+.fi-fo-toggle-buttons .fi-btn.fi-color-warning[aria-pressed='true'] {
+    background: var(--tn-orange) !important;
+    border-color: var(--tn-orange) !important;
+    box-shadow: 0 0 0 1px var(--tn-orange) !important;
+}
+
+/* Swap Disabled and OOM Killer Enabled are danger states in Pelican. */
+.fi-fo-toggle-buttons .fi-btn.fi-color-danger[aria-pressed='true'] {
+    background: var(--tn-red) !important;
+    border-color: var(--tn-red) !important;
+    box-shadow: 0 0 0 1px var(--tn-red) !important;
+}
+
 .fi-badge:not(.fi-color-danger):not(.fi-color-warning):not(.fi-color-success):not(.fi-color-info) {
     background: color-mix(in srgb, var(--tn-magenta) 16%, var(--tn-raised));
     color: var(--tn-magenta);
