@@ -5,21 +5,23 @@
 - GitLab is the canonical repository: `https://gitlab.com/Serpensin/pelican-tokyo-night-theme`.
 - GitHub is a GitLab-managed push mirror. Make source changes on `main`, push to GitLab, and verify the mirror ref afterwards.
 - The project is source-only. Do not commit ZIP archives, generated bundles, or other release binaries.
-- No release tag or Hub submission exists yet. Create either only when explicitly requested.
+- Prepare 1.1.0 locally; existing tags through v1.0.2 remain unchanged. Create a new tag or Hub submission only when explicitly requested.
 
 ## Compatibility policy
 
-The theme is tested with Pelican Panel `1.0.0-rc.2`.
+The new integration targets the built-in theme switcher from Panel PR #2595 (currently on canary). It implements `App\Contracts\Plugins\HasTheme`, which extends Filament's plugin contract. Older Panel versions without this interface cannot load this revision.
 
-`plugin.json` deliberately uses `"panel_version": null`; it does not claim a SemVer constraint that would exclude the currently tested release candidate. Update the README and this note after testing against a different Panel version.
+Version 1.1.0 enforces exactly `"panel_version": ">=1.0.0-rc.3"`, as specified by the maintainer. Preserve that lower bound in the manifest and tests. The HasTheme implementation was installed on the GGC Panel, its theme discovery and public CSS were verified, and the maintainer confirmed that it works in the UI. This does not establish complete PelicanHub acceptance or a separate test against a tagged rc.3 release.
+
+Do not publish an unrestricted update for older Panels. No update feed is created or changed as part of this local version preparation; verify the Panel/Hub update-selection behavior and preserve historical release descriptors when publication is explicitly requested.
 
 ## Theme architecture
 
-- `src/TokyoNightThemePlugin.php` publishes the static `css/` directory to Pelican’s public plugin-assets path and injects the active stylesheet through a Filament head render hook.
+- `src/TokyoNightThemePlugin.php` implements `HasTheme`; registration and boot are inert. Colors come from `getThemeColors()`, font and Vite entry return null, and `getThemeRenderHooks()` exposes the early head hook. Pelican gates its execution by the active theme.
 - `css/tokyo-night.css` and `css/tokyo-night-light.css` define mode-specific tokens; both import `css/base.css` for shared component rules.
 - `src/Providers/TokyoNightThemePluginProvider.php` exposes the CSS directory to Laravel’s publishing system.
 - A MutationObserver follows Pelican’s `dark` HTML class and replaces the single theme stylesheet. Do not add a competing appearance toggle.
-- Copy changed CSS files during plugin registration. A destination-directory-exists check alone leaves old public CSS deployed after an API import/update.
+- Copy changed CSS files inside the active theme's head-hook closure, not during registration or hook collection. A destination-directory-exists check alone leaves old public CSS deployed after an API import/update.
 
 ## Console integration
 
@@ -44,6 +46,7 @@ php -l src/TokyoNightThemePlugin.php
 php -l src/Providers/TokyoNightThemePluginProvider.php
 python3 tests/test_manifest.py
 python3 tests/test_theme_css.py
+php tests/test_theme_contract.php
 git diff --check
 git archive --worktree-attributes --format=tar HEAD | tar -tf - | sort
 ```
@@ -57,5 +60,5 @@ Before a Hub submission:
 1. Keep `plugin.json.update_url` at the Hub-derived URL.
 2. Add an append-only `update.json` release entry with an immutable source-archive URL.
 3. Ensure `.gitattributes` excludes `DEVNOTES.md`, tests, and other maintainer-only metadata from runtime archives.
-4. Verify that the generated archive contains `plugin.json`, `src/`, `config/`, `css/`, `images/`, `README.md`, and `LICENSE`.
+4. Verify that the generated archive contains `plugin.json`, `src/`, `config/`, `css/`, `README.md`, `CHANGELOG.md`, and `LICENSE`. Preview images use external URLs.
 5. Scan the complete repository for Hub-restricted call patterns before submission.

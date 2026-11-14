@@ -28,8 +28,9 @@ The theme applies the Tokyo Night palette to the Panel interface while preservin
 
 ## Compatibility
 
-- Tested with Pelican Panel `1.0.0-rc.2`.
-- The plugin manifest does not enforce a Panel-version constraint.
+- Version 1.1.0 requires Pelican Panel **1.0.0-rc.3 or newer**. The plugin manifest enforces `>=1.0.0-rc.3`.
+- Integrates with Pelican's built-in theme switcher through `App\Contracts\Plugins\HasTheme` (Panel PR #2595).
+- Older Panel versions are not supported. Keep version 1.0.2 on those installations.
 
 ## Install
 
@@ -45,4 +46,5 @@ The theme applies the Tokyo Night palette to the Panel interface while preservin
    php artisan p:plugin:install serpensin-tokyo-night-theme
    ```
 
-3. Open Pelican and select your preferred light or dark appearance mode.
+3. Select **Tokyo Night** from the user-menu theme picker or your profile. Administrators can set it as the default theme or force it in Settings.
+4. Select your preferred light or dark appearance mode as usual. Choosing another theme or no theme stops Pelican from loading this theme's styles and console integration on the next page load.

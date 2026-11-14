@@ -2,7 +2,7 @@
     "id": "serpensin-tokyo-night-theme",
     "name": "Tokyo Night",
     "author": "Serpensin",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "api_version": 1,
     "description": "Tokyo Night and Tokyo Night Light themes for Pelican.",
     "category": "theme",
@@ -11,6 +11,6 @@
     "namespace": "Serpensin\\TokyoNightTheme",
     "class": "TokyoNightThemePlugin",
     "panels": ["admin", "server", "app"],
-    "panel_version": null,
+    "panel_version": ">=1.0.0-rc.3",
     "composer_packages": null
 }

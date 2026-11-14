@@ -2,12 +2,12 @@
 
 namespace Serpensin\TokyoNightTheme;
 
-use Filament\Contracts\Plugin;
+use App\Contracts\Plugins\HasTheme;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 use Illuminate\Support\Facades\File;
 
-class TokyoNightThemePlugin implements Plugin
+class TokyoNightThemePlugin implements HasTheme
 {
     public function getId(): string
     {
@@ -16,20 +16,39 @@ class TokyoNightThemePlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $this->publishStylesheets();
+        // Theme styling is registered by Pelican only for the active theme.
+    }
 
-        $panel->colors([
+    public function getThemeColors(): array
+    {
+        return [
             'primary' => Color::hex('#7aa2f7'),
             'info' => Color::hex('#7dcfff'),
             'success' => Color::hex('#9ece6a'),
             'warning' => Color::hex('#e0af68'),
             'danger' => Color::hex('#f7768e'),
-        ]);
+        ];
+    }
 
-        $dark = asset('plugins/serpensin-tokyo-night-theme/css/tokyo-night.css');
-        $light = asset('plugins/serpensin-tokyo-night-theme/css/tokyo-night-light.css');
+    public function getThemeFont(): ?string
+    {
+        return null;
+    }
 
-        $panel->renderHook('panels::head.end', fn (): string => <<<HTML
+    public function getThemeViteEntry(): string|array|null
+    {
+        return null; // Static stylesheets are delivered by the head hook.
+    }
+
+    public function getThemeRenderHooks(): array
+    {
+        return ['panels::head.end' => function (): string {
+            $this->publishStylesheets();
+
+            $dark = asset('plugins/serpensin-tokyo-night-theme/css/tokyo-night.css');
+            $light = asset('plugins/serpensin-tokyo-night-theme/css/tokyo-night-light.css');
+
+            return <<<HTML
 <link id="tokyo-night-theme-stylesheet" rel="stylesheet">
 <script>
 (() => {
@@ -86,7 +105,8 @@ class TokyoNightThemePlugin implements Plugin
     apply();
 })();
 </script>
-HTML);
+HTML;
+        }];
     }
 
     public function boot(Panel $panel): void {}

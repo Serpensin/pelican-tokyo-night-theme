@@ -8,7 +8,7 @@ light = (root / 'css/tokyo-night-light.css').read_text()
 base = (root / 'css/base.css').read_text()
 
 for token in [
-    "renderHook('panels::head.end'",
+    "return ['panels::head.end' => function (): string",
     "public_path('plugins/serpensin-tokyo-night-theme/css')",
     "__DIR__ . '/../css'",
     'File::files($source)',
