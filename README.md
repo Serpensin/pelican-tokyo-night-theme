@@ -28,7 +28,7 @@ The theme applies the Tokyo Night palette to the Panel interface while preservin
 
 ## Compatibility
 
-- Version 1.1.0 requires Pelican Panel **1.0.0-rc.3 or newer**. The plugin manifest enforces `>=1.0.0-rc.3`.
+- Version 1.1.1 requires Pelican Panel **1.0.0-rc.3 or newer within 1.x**. The plugin manifest enforces `^1.0.0-rc.3`, excluding Panel 2.0.0 and newer.
 - Integrates with Pelican's built-in theme switcher through `App\Contracts\Plugins\HasTheme` (Panel PR #2595).
 - Older Panel versions are not supported. Keep version 1.0.2 on those installations.
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1
+
+### Fixed
+
+- Use Pelican's supported `^1.0.0-rc.3` compatibility syntax. The previous `>=1.0.0-rc.3` value was treated as an exact version string and incorrectly rejected compatible Panels.
+- Accept Panel rc.3 and later 1.x versions while rejecting rc.2 and Panel 2.0.0 or newer.
+
 ## 1.1.0
 
 ### Added

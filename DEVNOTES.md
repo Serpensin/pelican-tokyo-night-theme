@@ -5,13 +5,15 @@
 - GitLab is the canonical repository: `https://gitlab.com/Serpensin/pelican-tokyo-night-theme`.
 - GitHub is a GitLab-managed push mirror. Make source changes on `main`, push to GitLab, and verify the mirror ref afterwards.
 - The project is source-only. Do not commit ZIP archives, generated bundles, or other release binaries.
-- Prepare 1.1.0 locally; existing tags through v1.0.2 remain unchanged. Create a new tag or Hub submission only when explicitly requested.
+- Release 1.1.1 corrects the compatibility constraint. Preserve all existing release tags, including v1.1.0; never replace a published tag for a metadata fix.
 
 ## Compatibility policy
 
 The new integration targets the built-in theme switcher from Panel PR #2595 (currently on canary). It implements `App\Contracts\Plugins\HasTheme`, which extends Filament's plugin contract. Older Panel versions without this interface cannot load this revision.
 
-Version 1.1.0 enforces exactly `"panel_version": ">=1.0.0-rc.3"`, as specified by the maintainer. Preserve that lower bound in the manifest and tests. The HasTheme implementation was installed on the GGC Panel, its theme discovery and public CSS were verified, and the maintainer confirmed that it works in the UI. This does not establish complete PelicanHub acceptance or a separate test against a tagged rc.3 release.
+Version 1.1.1 uses `"panel_version": "^1.0.0-rc.3"`. The installed Panel's `App\Models\Plugin::isCompatible()` supports exact versions and caret ranges, not generic Composer operators: a value beginning with `>=` is compared literally and rejects even the stated minimum. Validate every compatibility change against the real Panel model with unsaved instances, not only a manifest-string assertion. Require rc.2 rejection, rc.3 and stable 1.x acceptance, and 2.0.0 rejection. Do not replace this caret with an unbounded minimum without verifying upstream parser support.
+
+The HasTheme implementation was installed on the GGC Panel, its theme discovery and public CSS were verified, and the maintainer confirmed that it works in the UI. This does not establish complete PelicanHub acceptance.
 
 Do not publish an unrestricted update for older Panels. No update feed is created or changed as part of this local version preparation; verify the Panel/Hub update-selection behavior and preserve historical release descriptors when publication is explicitly requested.
 
@@ -47,6 +49,8 @@ php -l src/Providers/TokyoNightThemePluginProvider.php
 python3 tests/test_manifest.py
 python3 tests/test_theme_css.py
 php tests/test_theme_contract.php
+# Requires a real Panel installation; uses unsaved model instances only:
+php tests/test_panel_compatibility.php /path/to/panel
 git diff --check
 git archive --worktree-attributes --format=tar HEAD | tar -tf - | sort
 ```

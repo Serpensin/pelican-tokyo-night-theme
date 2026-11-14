@@ -9,8 +9,8 @@ assert plugin['api_version'] == 1
 assert plugin['class'] == 'TokyoNightThemePlugin'
 assert plugin['namespace'] == 'Serpensin\\TokyoNightTheme'
 assert plugin['panels'] == ['admin', 'server', 'app']
-assert plugin['version'] == '1.1.0'
-assert plugin['panel_version'] == '>=1.0.0-rc.3'
+assert plugin['version'] == '1.1.1'
+assert plugin['panel_version'] == '^1.0.0-rc.3'
 assert plugin['composer_packages'] is None
 assert plugin['update_url'] == 'https://hub.pelican.dev/plugins/serpensin-tokyo-night-theme/update.json'
 
